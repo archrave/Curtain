@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1002079624983",
+    "project_id": "curtain-chat-app",
+    "storage_bucket": "curtain-chat-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002079624983:android:8d9d112c745b5072632152",
+        "android_client_info": {
+          "package_name": "com.divyanshjoshi.curtain_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002079624983-5t64grorkhsdhi6l67co5ln8mcqad09q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBURsJhQoB2GHiu68TFY_9e7OoeBwjOng0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002079624983-5t64grorkhsdhi6l67co5ln8mcqad09q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
