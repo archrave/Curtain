@@ -15,6 +15,19 @@ class ChatScreen extends StatelessWidget {
           child: Text('This shit works'),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Firestore.instance
+              .collection('/chats/OLY8NDXS6l75yCRFY31J/messages')
+              .snapshots()
+              .listen((data) {
+            data.documents.forEach((element) {
+              print(element['text']);
+            });
+          });
+        },
+      ),
     );
   }
 }
