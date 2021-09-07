@@ -8,23 +8,32 @@ class ChatScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Curtain'),
       ),
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (ctx, i) => Container(
-          padding: EdgeInsets.all(8),
-          child: Text('This shit works'),
-        ),
-      ),
+      body: StreamBuilder(
+          stream: Firestore.instance
+              .collection('/chats/OLY8NDXS6l75yCRFY31J/messages')
+              .snapshots(),
+          builder: (ctx, streamSnapshot) {
+            if (streamSnapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final docs = streamSnapshot.data.documents;
+            return ListView.builder(
+              itemCount: docs.length,
+              itemBuilder: (ctx, i) => Container(
+                padding: EdgeInsets.all(8),
+                child: Text(docs[i]['text']),
+              ),
+            );
+          }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
           Firestore.instance
               .collection('/chats/OLY8NDXS6l75yCRFY31J/messages')
-              .snapshots()
-              .listen((data) {
-            data.documents.forEach((element) {
-              print(element['text']);
-            });
+              .add({
+            'text': 'Dummy on message by clicking + ',
           });
         },
       ),
