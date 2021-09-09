@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
+  final void Function(
+    String email,
+    String password,
+    String username,
+    bool isLogin,
+    BuildContext,
+  ) submitFn;
+
+  AuthForm(this.submitFn);
+
   @override
   _AuthFormState createState() => _AuthFormState();
 }
@@ -11,7 +21,6 @@ class _AuthFormState extends State<AuthForm> {
   String _userEmail = '';
   String _userName = '';
   String _userPassword = '';
-
   final _passwordController = TextEditingController();
 
   void _trySubmit() {
@@ -24,6 +33,9 @@ class _AuthFormState extends State<AuthForm> {
       print(_userEmail);
       print(_userName);
       print(_userPassword);
+      // trim() trims of the excess white spaces in the beginning and the end
+      widget.submitFn(_userEmail.trim(), _userPassword, _userName.trim(),
+          _isLogin, context);
     }
   }
 
