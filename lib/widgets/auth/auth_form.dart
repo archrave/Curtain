@@ -9,7 +9,8 @@ class AuthForm extends StatefulWidget {
     BuildContext,
   ) submitFn;
 
-  AuthForm(this.submitFn);
+  final bool isLoading;
+  AuthForm(this.submitFn, this.isLoading);
 
   @override
   _AuthFormState createState() => _AuthFormState();
@@ -121,21 +122,34 @@ class _AuthFormState extends State<AuthForm> {
                       },
                     ),
                   SizedBox(height: 12),
-                  RaisedButton(
-                    child: Text(_isLogin ? 'Login' : 'Sign Up'),
-                    onPressed: _trySubmit,
+                  Container(
+                    height: 100,
+                    child: widget.isLoading
+                        ? Center(child: CircularProgressIndicator())
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RaisedButton(
+                                child: Text(_isLogin ? 'Login' : 'Sign Up'),
+                                onPressed: _trySubmit,
+                              ),
+                              // widget.isLoading
+                              //     ? CircularProgressIndicator()
+                              //     :
+                              FlatButton(
+                                child: Text(_isLogin
+                                    ? 'Create Account'
+                                    : 'I already have an acccount'),
+                                onPressed: () {
+                                  setState(() {
+                                    _isLogin = !_isLogin;
+                                  });
+                                },
+                                textColor: Theme.of(context).accentColor,
+                              )
+                            ],
+                          ),
                   ),
-                  FlatButton(
-                    child: Text(_isLogin
-                        ? 'Create Account'
-                        : 'I already have an acccount'),
-                    onPressed: () {
-                      setState(() {
-                        _isLogin = !_isLogin;
-                      });
-                    },
-                    textColor: Theme.of(context).accentColor,
-                  )
                 ],
               ),
             ),
