@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/auth/chats/messages.dart';
+import '../widgets/auth/chats/new_message.dart';
 
 class ChatScreen extends StatelessWidget {
   @override
@@ -41,18 +42,9 @@ class ChatScreen extends StatelessWidget {
         child: Column(
           children: [
             Expanded(child: Messages()),
+            NewMessage(),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          Firestore.instance
-              .collection('/chats/OLY8NDXS6l75yCRFY31J/messages')
-              .add({
-            'text': 'Dummy on message by clicking + ',
-          });
-        },
       ),
     );
   }
