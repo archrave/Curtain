@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import './screens/chat_screen.dart';
 import './screens/auth_screen.dart';
 
@@ -24,7 +25,13 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: AuthScreen(),
+      // This stream below emits a new value whenever it changes.
+      // It changes whenever we log in, log out or sign Up, or when the user has already logged in and the app is opened up.
+      home: StreamBuilder(
+          stream: FirebaseAuth.instance.onAuthStateChanged,
+          builder: (ctx, userSnapshot) {
+            return userSnapshot.hasData ? ChatScreen() : AuthScreen();
+          }),
       debugShowCheckedModeBanner: false,
     );
   }
