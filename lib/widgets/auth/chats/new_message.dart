@@ -10,9 +10,6 @@ class _NewMessageState extends State<NewMessage> {
   var _enteredMessage = '';
 
   final _controller = new TextEditingController();
-  String get message {
-    return _enteredMessage.trim();
-  }
 
   void _sendMessage() {
     FocusScope.of(context).unfocus();
@@ -20,6 +17,7 @@ class _NewMessageState extends State<NewMessage> {
       'text': _enteredMessage.trim(),
       'timestamp':
           Timestamp.now(), //Timestamp class is from the cloudfirestore library
+      // add user id here
     });
     _controller.clear();
   }
