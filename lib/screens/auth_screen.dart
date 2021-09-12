@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,11 +13,14 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   final _auth = FirebaseAuth.instance;
+
   var _isLoading = false;
+
   void _submitAuthForm(
     String email,
     String password,
     String username,
+    File image,
     bool isLogin,
     BuildContext ctx,
   ) async {
@@ -31,6 +36,16 @@ class _AuthScreenState extends State<AuthScreen> {
       } else {
         authResult = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
+        //Storing profile picture
+        final ref = FirebaseStorage.instance
+            .ref()
+            .child('/user_profile_pictures')
+            .child(authResult.user.uid + '.jpg');
+
+        // The following upload is of type StorageUploadTask, we use onComplete() on it to return a future
+
+        await ref.putFile(image).onComplete;
+
         // Storing the username on our firestore/ We're creating a collection and storing documents inside it with passing UserIds
         await Firestore.instance
             .collection('users')
