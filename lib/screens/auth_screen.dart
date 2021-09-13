@@ -45,7 +45,7 @@ class _AuthScreenState extends State<AuthScreen> {
         // The following upload is of type StorageUploadTask, we use onComplete() on it to return a future
 
         await ref.putFile(image).onComplete;
-
+        final pfpUrl = await ref.getDownloadURL();
         // Storing the username on our firestore/ We're creating a collection and storing documents inside it with passing UserIds
         await Firestore.instance
             .collection('users')
@@ -53,6 +53,7 @@ class _AuthScreenState extends State<AuthScreen> {
             .setData({
           'username': username,
           'email': email,
+          'profile_picture_url': pfpUrl,
         });
       }
     } on PlatformException catch (err) {

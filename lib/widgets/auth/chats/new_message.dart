@@ -24,6 +24,7 @@ class _NewMessageState extends State<NewMessage> {
           Timestamp.now(), // Timestamp class is from the cloudfirestore library
       'userId': user.uid,
       'username': userData['username'],
+      'userImage': userData['profile_picture_url']
     });
     _controller.clear();
   }
