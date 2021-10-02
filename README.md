@@ -15,13 +15,13 @@ A chat app using Firebase's SDK for flutter and services like cloud firestore
 
 ## Instructions
 
-All dart scripts are located inside the lib folder.
+All dart scripts are located inside the folder named lib.
 
 To run this app on a virtual machine (mobile emulator), your android device or your web browser, just clone the project, open your terminal inside that folder and use this command: 
 ```
 flutter run
 ```
-(Must have flutter in the system PATH, and USB Debugging enabled if you're using an Andriod device)
+(Must have flutter in the system PATH, and USB Debugging enabled if you're using an Android device)
 
 Note: Project is under development at this stage
 
